@@ -20,7 +20,8 @@
     "test": "npm-run-all -s test:*",
     "build": "babel src -d lib --source-maps && babel test -d testbuild --source-maps",
     "pretest:import": "npm run build",
-    "pretest:require": "npm run build"
+    "pretest:require": "npm run build",
+    "publish": "npm publish --access public"
   },
   "repository": {
     "type": "git",
