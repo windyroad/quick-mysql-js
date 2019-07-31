@@ -1,6 +1,6 @@
 {
   "name": "@windyroad/quick-mysql-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Utility methods for quickly starting up containers. Useful for when you're testing code that depends on databases, kafka, elasticsearch or similar.",
   "main": "lib/index.js",
   "files": [
@@ -90,6 +90,6 @@
   },
   "dependencies": {
     "@windyroad/wait-on-mysql": "^1.0.0",
-    "@windyroad/quick-containers-js": "^1.0.4"
+    "@windyroad/quick-containers-js": "^2.0.0"
   }
 }
