@@ -29,40 +29,12 @@ import waitport from 'wait-port'
 ...
 
 const docker = new Docker();
-qc.ensurePulled(docker, 'mysql:latest', console.log).then(...).catch(...)
-qmysql.ensureMySqlStarted(docker); 
-// 👆same as qm.ensureMySqlStarted(Docker, 'latest', '3306', 60000, 'my-secret-pw', []);
-```
+qc.ensurePulled(docker, 'mysql:5.7.26')
+  .then(() => {
+    return qmysql.ensureMySqlStarted(docker, '5.7.26', PORT_B)
+    // 👆same as qm.ensureMySqlStarted(Docker,  '5.7.26', PORT_B, 60000, 'my-secret-pw', []);
+  })
+  .then(...)
+  .catch(...)
 
-`qmysql.ensureMySqlStarted(docker, version, port, timeout, password, env);` is equivalent to
-
-```js
-qc.ensureStarted(
-  docker,
-  {
-    Image: `mysql:${version}`,
-    Tty: false,
-    ExposedPorts: {
-      '3306/tcp': {},
-    },
-    HostConfig: {
-      PortBindings: { '3306/tcp': [{ HostPort: `${port}` }] },
-    },
-    Env: env.concat([`MYSQL_ROOT_PASSWORD=${password}`]),
-    name: `qc-mysql-${version}-${port}`,
-  },
-  () => {
-    return waitOnMysql(
-      {
-        host: 'localhost',
-        port: port,
-        user: 'root',
-        password: password,
-      },
-      {
-        timeout: timeout,
-      },
-    );
-  },
-);
 ```
